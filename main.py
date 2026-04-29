@@ -1,7 +1,18 @@
-import core.parser
+import core.parser as parser
+import core.differentiator as differentiator
+
+evaluate = True
+user_input = 0
 
 user = input("Enter a function: ")
-#future implementation: display function before x-input by user
-user_input = float(input("Enter x-value: "))
+condition = input("Evaluate function? (y/n): ")
 
-print(core.parser.parse_function(user, user_input))
+if condition == 'y':
+    #future implementation: display function before x-input by user
+    user_input = float(input("Enter x-value: "))
+else:
+    evaluate = False
+
+
+print(differentiator.differentiate(user, user_input, evaluate))
+print(parser.parse_function(user, user_input, evaluate))
