@@ -1,5 +1,6 @@
 import core.parser as parser
 import core.differentiator as differentiator
+import core.integrator as integrator
 
 evaluate = True
 user_input = 0
@@ -13,6 +14,6 @@ if condition == 'y':
 else:
     evaluate = False
 
-
 print(differentiator.differentiate(user, user_input, evaluate))
 print(parser.parse_function(user, user_input, evaluate))
+print(integrator.integration(user, user_input, user_input2, evaluate))
