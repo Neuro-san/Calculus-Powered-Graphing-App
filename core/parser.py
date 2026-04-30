@@ -1,13 +1,11 @@
-from sympy import symbols, sympify
-# import 'pretty' as well if need human-readable function
+from sympy import sympify, pretty
+from sympy.abc import x
 
-def parse_function(input_function, value, evaluate=True):
-    x = symbols('x')
-    
-    sympified = sympify(input_function)
+def parse_function(function_str, x_value=None, evaluate=False):
+    f_callable = sympify(function_str)
 
-    if evaluate:
-        result = float(sympified.subs(x, value))
-        return result   #returns a value substituted from input_function
-    else:
-        return sympified    #returns input_function
+    if not evaluate:
+        return pretty(f_callable)    # returns input_function
+        
+    result = float(f_callable.subs(x, x_value))
+    return result   #returns a value substituted from input_function

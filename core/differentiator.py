@@ -1,14 +1,13 @@
 from scipy.differentiate import derivative
-from sympy import sympify, diff, symbols, lambdify
+from sympy import sympify, diff, lambdify, pretty
+from sympy.abc import x
 
-def differentiate(input_function, value, evaluate=True):
-    x = symbols('x')
+def differentiate(function_str, x_value=None, evaluate=False):
+    sympified = sympify(function_str)
 
-    sympified = sympify(input_function)
-
-    if evaluate:
-        function = lambdify(x, sympified, "numpy")
-        result =  derivative(function, value) 
-        return result.df    #returns value substituted from 1st derivative
-    else:
-        return diff(sympified) #returns the 1st derivative
+    if not evaluate:
+        return pretty(diff(sympified))  # returns the 1st derivative
+    
+    df_callable = lambdify(x, sympified, "numpy")
+    result =  derivative(df_callable, x_value) 
+    return result.df    # returns value substituted from 1st derivative
